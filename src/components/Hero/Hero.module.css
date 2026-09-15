@@ -1,4 +1,4 @@
-.hero {
+﻿.hero {
   position: relative;
   min-height: 85vh;
   display: flex;
@@ -13,7 +13,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* Utilizando a imagem fornecida pelo usuário, que deve ser salva na pasta public como hero.jpg */
   background-image: url('/hero.jpg');
   background-size: cover;
   background-position: center;
@@ -26,7 +25,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* Gradiente para garantir legibilidade (mais escuro à esquerda onde fica o texto) */
   background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%);
 }
 
@@ -37,7 +35,7 @@
 }
 
 .content {
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .title {
@@ -58,23 +56,53 @@
 }
 
 .searchBox {
-  background-color: rgba(17, 24, 39, 0.9);
+  background-color: rgba(17, 24, 39, 0.95);
   backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-gray-800);
   box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.searchGrid {
+.brandList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-800);
+  justify-content: flex-start;
+}
+
+.brandItem {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-gray-800);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.brandItem:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: rgba(229, 9, 20, 0.05);
+}
+
+.filterGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
 @media (min-width: 768px) {
-  .searchGrid {
-    grid-template-columns: repeat(4, 1fr);
+  .filterGrid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1.5fr;
     align-items: flex-end;
   }
 }
@@ -86,10 +114,11 @@
 }
 
 .inputGroup label {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--text-secondary);
-  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .inputGroup select {
@@ -99,10 +128,9 @@
   border-radius: var(--radius-md);
   background-color: var(--color-black);
   color: var(--color-white);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   outline: none;
   transition: border-color var(--transition-fast);
-  appearance: none; /* Remove seta padrão em alguns navegadores, melhor customizar depois */
 }
 
 .inputGroup select:focus {
@@ -110,24 +138,25 @@
 }
 
 .btnSearch {
-  background-color: var(--color-primary);
+  background-color: #E50914;
   color: var(--color-white);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 1rem;
   transition: var(--transition-fast);
-  height: 46px;
-  white-space: nowrap;
+  height: 44px;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .btnSearch:hover {
-  background-color: var(--color-primary-hover);
+  background-color: #b80710;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
 }
 
 @media (max-width: 767px) {

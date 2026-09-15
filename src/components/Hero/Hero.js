@@ -1,14 +1,15 @@
-import styles from './Hero.module.css';
+﻿import styles from './Hero.module.css';
 
 export default function Hero() {
+  const brands = ['VW', 'Toyota', 'Land Rover', 'Nissan', 'Fiat', 'Chevrolet', 'Ford', 'Jeep', 'Honda', 'Mitsubishi', 'Hyundai', 'Peugeot'];
+
   return (
     <section className={styles.hero}>
-      {/* Background image com overlay escuro */}
       <div className={styles.background}>
         <div className={styles.overlay}></div>
       </div>
 
-      <div className={`container ${styles.container}`}>
+      <div className={"container \"}>
         <div className={styles.content}>
           <h1 className={styles.title}>
             Seu próximo carro <br /> está aqui.
@@ -18,22 +19,19 @@ export default function Hero() {
           </p>
 
           <div className={styles.searchBox}>
-            <div className={styles.searchGrid}>
-              <div className={styles.inputGroup}>
-                <label>Marca</label>
-                <select defaultValue="">
-                  <option value="" disabled>Todas as marcas</option>
-                  <option value="volkswagen">Volkswagen</option>
-                  <option value="chevrolet">Chevrolet</option>
-                  <option value="bmw">BMW</option>
-                  <option value="toyota">Toyota</option>
-                </select>
-              </div>
+            <div className={styles.brandList}>
+              {brands.map((brand) => (
+                <button key={brand} className={styles.brandItem}>
+                  {brand}
+                </button>
+              ))}
+            </div>
 
+            <div className={styles.filterGrid}>
               <div className={styles.inputGroup}>
-                <label>Modelo</label>
+                <label>MODELO</label>
                 <select defaultValue="">
-                  <option value="" disabled>Todos os modelos</option>
+                  <option value="" disabled>Modelo</option>
                   <option value="polo">Polo</option>
                   <option value="compass">Compass</option>
                   <option value="hilux">Hilux</option>
@@ -41,18 +39,43 @@ export default function Hero() {
               </div>
 
               <div className={styles.inputGroup}>
-                <label>Preço Máximo</label>
+                <label>ANO DE</label>
                 <select defaultValue="">
-                  <option value="" disabled>Qualquer valor</option>
-                  <option value="50000">Até R$ 50.000</option>
-                  <option value="100000">Até R$ 100.000</option>
-                  <option value="150000">Até R$ 150.000</option>
-                  <option value="200000">Até R$ 200.000</option>
+                  <option value="" disabled>Selecione</option>
+                  <option value="2015">2015</option>
+                  <option value="2018">2018</option>
+                </select>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label>ANO ATÉ</label>
+                <select defaultValue="">
+                  <option value="" disabled>Selecione</option>
+                  <option value="2020">2020</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label>PREÇO DE</label>
+                <select defaultValue="">
+                  <option value="" disabled>Selecione</option>
+                  <option value="50000">50k</option>
+                  <option value="100000">100k</option>
+                </select>
+              </div>
+
+              <div className={styles.inputGroup}>
+                <label>PREÇO ATÉ</label>
+                <select defaultValue="">
+                  <option value="" disabled>Selecione</option>
+                  <option value="150000">150k</option>
+                  <option value="250000">250k+</option>
                 </select>
               </div>
 
               <button className={styles.btnSearch}>
-                Encontrar meu carro
+                Buscar
               </button>
             </div>
           </div>
