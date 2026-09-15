@@ -1,4 +1,4 @@
-import Link from 'next/link';
+ï¿½import Link from 'next/link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -9,17 +9,18 @@ export default function Footer() {
           <div className={styles.brandCol}>
             <img src="/logo.png" alt="Pimentas Car" style={{ height: "70px", width: "auto", marginBottom: "1.5rem" }} />
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              A melhor experiência para comprar seu próximo veículo em São Bernardo do Campo. Qualidade, confiança e procedência garantida.
+              A melhor experiÃªncia para comprar seu prÃ³ximo veÃ­culo em SÃ£o Bernardo do Campo. Qualidade, confianÃ§a e procedÃªncia garantida.
             </p>
           </div>
           
           <div>
-            <h3 className={styles.title}>Navegação</h3>
+            <h3 className={styles.title}>NavegaÃ§Ã£o</h3>
             <div className={styles.links}>
-              <Link href="/">Início</Link>
+              <Link href="/">InÃ­cio</Link>
               <Link href="/estoque">Estoque</Link>
               <Link href="/financiamento">Financiamento</Link>
-              <Link href="/sobre">Sobre nós</Link>
+              <Link href="/vender">Vender</Link>
+              <Link href="/sobre">Sobre nÃ³s</Link>
             </div>
           </div>
 
@@ -32,15 +33,15 @@ export default function Footer() {
               <a href="https://instagram.com/pimentas_car" target="_blank" rel="noopener noreferrer" className={styles.contactItem} style={{textDecoration: 'none'}}>
                 <span className={styles.icon}><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span> @pimentas_car
               </a>
-              <div className={styles.contactItem} style={{ alignItems: 'flex-start' }}>
+              <a href="https://maps.google.com/?q=Av.+Brg.+Faria+Lima,+1002+-+Centro,+Sï¿½o+Bernardo+do+Campo+-+SP" target="_blank" rel="noopener noreferrer" className={styles.contactItem} style={{ alignItems: 'flex-start', textDecoration: 'none' }}>
                 <span className={styles.icon}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
-                <span>Av. Brg. Faria Lima, 1002 - Centro<br/>São Bernardo do Campo - SP</span>
-              </div>
+                <span>Av. Brg. Faria Lima, 1002 - Centro<br/>SÃ£o Bernardo do Campo - SP</span>
+              </a>
             </div>
           </div>
 
           <div>
-            <h3 className={styles.title}>Localização</h3>
+            <h3 className={styles.title}>LocalizaÃ§Ã£o</h3>
             <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', height: '200px' }}>
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.693761763155!2d-46.55018612470762!3d-23.687440068864703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce4237dcd41e97%3A0x6a2c2062fa0d3db7!2sAv.%20Brg.%20Faria%20Lima%2C%201002%20-%20Centro%2C%20S%C3%A3o%20Bernardo%20do%20Campo%20-%20SP%2C%2009720-000!5e0!3m2!1spt-BR!2sbr!4v1716301387687!5m2!1spt-BR!2sbr" 
@@ -65,3 +66,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

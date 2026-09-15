@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -15,6 +15,7 @@ export default function Header() {
           <Link href="/ofertas">Ofertas</Link>
           <Link href="/sobre">Sobre nós</Link>
           <Link href="/financiamento">Financiamento</Link>
+          <Link href="/vender">Vender</Link>
           <Link href="/contato">Contato</Link>
         </nav>
 
@@ -40,3 +41,4 @@ export default function Header() {
     </header>
   );
 }
+

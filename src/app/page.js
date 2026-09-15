@@ -1,3 +1,4 @@
+"use client";
 import Hero from '@/components/Hero/Hero';
 import VehicleCard from '@/components/VehicleCard/VehicleCard';
 import { mockVehicles } from '@/data/mockVehicles';
