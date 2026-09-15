@@ -14,7 +14,7 @@ export const mockVehicles = [
     doors: 4,
     featured: true,
     photos: [
-      'https://images.unsplash.com/photo-1549314486-455b870c5e7b?q=80&w=1200&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop'
     ]
   },
   {

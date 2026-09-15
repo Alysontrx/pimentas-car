@@ -4,15 +4,33 @@ import { useState } from 'react';
 
 export default function Financiamento() {
   const [name, setName] = useState('');
-  const [vehicle, setVehicle] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+
+  const maskCPF = (value) => {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1');
+  };
+
+  const maskDate = (value) => {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\d{2})(\d)/, '$1/$2')
+      .replace(/(\/\d{4})\d+?$/, '$1');
+  };
 
   const handleWhatsApp = (e) => {
     e.preventDefault();
-    if (!name) {
-      alert("Por favor, preencha seu nome!");
+    if (!name || !cpf || !birthDate) {
+      alert("Por favor, preencha todos os campos obrigatórios!");
       return;
     }
-    const msg = `Olá, meu nome é *${name}* e gostaria de simular um financiamento${vehicle ? ` para o veículo *${vehicle}*` : ''}.`;
+    const msg = `Olá! Gostaria de fazer uma simulação de financiamento.\n\n*Nome:* ${name}\n*CPF:* ${cpf}\n*Data de Nascimento:* ${birthDate}`;
     const url = `https://wa.me/5511997874777?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   };
@@ -39,37 +57,50 @@ export default function Financiamento() {
           Preencha rapidamente os dados abaixo e fale direto com nossa equipe via WhatsApp para uma simulação rápida e sem compromisso.
         </p>
 
-        <form onSubmit={handleWhatsApp} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left' }}>
-          <div>
-            <label style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.5rem', fontWeight: 'bold' }}>Seu Nome</label>
-            <input 
-              type="text" 
-              placeholder="Ex: João da Silva" 
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-              style={{ width: '100%', padding: '1rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-gray-800)', backgroundColor: 'var(--color-black)', color: 'white', outline: 'none', fontSize: '1rem' }}
-            />
-          </div>
+        <form onSubmit={handleWhatsApp} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
           
-          <div>
-            <label style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.5rem', fontWeight: 'bold' }}>Qual veículo deseja financiar? (Opcional)</label>
+          <input 
+            type="text" 
+            placeholder="Nome completo" 
+            value={name}
+            onChange={e => setName(e.target.value)}
+            required
+            style={inputStyle}
+          />
+          
+          <div className="grid-cols-responsive">
             <input 
               type="text" 
-              placeholder="Ex: BMW X1" 
-              value={vehicle}
-              onChange={e => setVehicle(e.target.value)}
-              style={{ width: '100%', padding: '1rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-gray-800)', backgroundColor: 'var(--color-black)', color: 'white', outline: 'none', fontSize: '1rem' }}
+              placeholder="CPF" 
+              value={cpf}
+              onChange={e => setCpf(maskCPF(e.target.value))}
+              required
+              style={inputStyle} 
+            />
+            <input 
+              type="text" 
+              placeholder="Data de nascimento" 
+              value={birthDate}
+              onChange={e => setBirthDate(maskDate(e.target.value))}
+              required
+              style={inputStyle} 
             />
           </div>
 
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', marginTop: '0.5rem', cursor: 'pointer' }}>
+            <input type="checkbox" required style={{ marginTop: '0.2rem' }} />
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+              Declaro que li e estou de acordo com os <a href="#" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>Termos de uso</a> e <a href="#" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>Política de Privacidade</a>
+            </span>
+          </label>
+
           <button 
             type="submit" 
-            style={{ backgroundColor: 'var(--color-primary)', color: 'white', padding: '1.2rem', textAlign: 'center', borderRadius: 'var(--radius-md)', fontWeight: 'bold', fontSize: '1.1rem', border: 'none', cursor: 'pointer', marginTop: '1rem', transition: 'var(--transition-fast)' }}
-            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#cc0000'; }}
+            style={{ backgroundColor: 'var(--color-primary)', color: 'white', padding: '1.2rem', textAlign: 'center', borderRadius: '30px', fontWeight: 'bold', fontSize: '1.1rem', border: 'none', cursor: 'pointer', marginTop: '1rem', transition: 'var(--transition-fast)' }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)'; }}
             onMouseOut={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary)'; }}
           >
-            Fazer Simulação no WhatsApp
+            Fazer Simulação
           </button>
         </form>
       </div>
@@ -77,3 +108,14 @@ export default function Financiamento() {
     </div>
   );
 }
+
+const inputStyle = {
+  width: '100%',
+  padding: '1rem',
+  borderRadius: 'var(--radius-sm)',
+  border: '1px solid var(--color-gray-800)',
+  backgroundColor: 'var(--color-black)',
+  color: 'var(--color-white)',
+  outline: 'none',
+  fontSize: '1rem'
+};

@@ -1,4 +1,4 @@
-﻿.hero {
+.hero {
   position: relative;
   min-height: 85vh;
   display: flex;
@@ -56,8 +56,8 @@
 }
 
 .searchBox {
-  background-color: rgba(17, 24, 39, 0.95);
-  backdrop-filter: blur(10px);
+  background-color: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-gray-800);
@@ -138,7 +138,7 @@
 }
 
 .btnSearch {
-  background-color: #E50914;
+  background-color: var(--color-primary);
   color: var(--color-white);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
@@ -154,9 +154,9 @@
 }
 
 .btnSearch:hover {
-  background-color: #b80710;
+  background-color: var(--color-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+  box-shadow: 0 4px 12px rgba(229, 0, 0, 0.3);
 }
 
 @media (max-width: 767px) {

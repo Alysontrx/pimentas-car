@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(10, 10, 10, 0.65);
+  background-color: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-gray-900);
   transition: var(--transition-normal);
@@ -11,7 +11,7 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 80px;
 }
 
@@ -20,6 +20,9 @@
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--color-white);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logo span {
@@ -31,9 +34,38 @@
   gap: 2rem;
 }
 
+.navOpen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-gray-900);
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-800);
+  box-shadow: var(--shadow-md);
+  gap: 1.5rem;
+}
+
 @media (min-width: 1024px) {
+  .container {
+    justify-content: space-between;
+  }
+  .logo {
+    position: static;
+    transform: none;
+  }
   .nav {
     display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
   }
 }
 
@@ -44,8 +76,15 @@
   transition: var(--transition-fast);
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.active {
   color: var(--color-primary);
+}
+
+.mobileNavWhatsapp {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .actions {
@@ -56,7 +95,7 @@
 
 .btnWhatsapp {
   display: none;
-  background-color: var(--color-primary);
+  background-color: #25D366;
   color: var(--color-white);
   padding: 0.6rem 1.2rem;
   border-radius: var(--radius-md);
@@ -67,15 +106,22 @@
 }
 
 .btnWhatsapp:hover {
-  background-color: var(--color-primary-hover);
+  background-color: #1EBE5D;
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
+.desktopWhatsapp {
+  display: none;
+}
+
 @media (min-width: 768px) {
-  .btnWhatsapp {
+  .desktopWhatsapp {
     display: inline-flex;
     align-items: center;
+  }
+  .mobileNavWhatsapp {
+    display: none;
   }
 }
 

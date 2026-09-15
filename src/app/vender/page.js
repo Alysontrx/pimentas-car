@@ -15,14 +15,14 @@ export default function Vender() {
       alert("Por favor, preencha todos os campos!");
       return;
     }
-    const msg = "Olá, me chamo *\*. Tenho interesse em vender meu veículo: *\ \ \*, com *\km* rodados. (Financiado: *\*)";
-    const url = "https://wa.me/5511997874777?text=\";
+    const msg = `Olá, me chamo *${nome}*. Tenho interesse em vender meu veículo: *${marca} ${modelo} ${ano}*, com *${km}km* rodados. (Financiado: *${financiado}*)`;
+    const url = `https://wa.me/5511997874777?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
   };
 
   return (
     <div style={{
-      backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url("/storefront.jpg")',
+      backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url("/hero.jpg")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
@@ -40,7 +40,7 @@ export default function Vender() {
 
           <form onSubmit={handleWhatsApp} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div className="grid-cols-responsive">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <label style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '0.5px' }}>MARCA</label>
                 <input type="text" value={marca} onChange={e => setMarca(e.target.value)} required style={{ padding: '0.9rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-gray-800)', backgroundColor: 'var(--color-black)', color: 'white', outline: 'none' }} />
@@ -52,7 +52,7 @@ export default function Vender() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div className="grid-cols-responsive">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <label style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '0.5px' }}>ANO</label>
                 <input type="text" value={ano} onChange={e => setAno(e.target.value)} required style={{ padding: '0.9rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-gray-800)', backgroundColor: 'var(--color-black)', color: 'white', outline: 'none' }} />

@@ -3,15 +3,16 @@ import Hero from '@/components/Hero/Hero';
 import VehicleCard from '@/components/VehicleCard/VehicleCard';
 import { mockVehicles } from '@/data/mockVehicles';
 import Link from 'next/link';
+import styles from './page.module.css';
 
 export default function Home() {
-  const destaques = mockVehicles.slice(0, 6);
+  const destaques = mockVehicles.slice(0, 3);
 
   return (
     <>
       <Hero />
       
-      <section className="container" style={{ padding: '5rem 1.5rem' }}>
+      <section className="container" style={{ padding: '0 1.5rem', marginTop: '5rem', position: 'relative', zIndex: 10 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
           <div>
             <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--color-white)', marginBottom: '0.5rem' }}>Destaques</h2>
@@ -19,7 +20,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+        <div className={styles.featuredGrid}>
           {destaques.map(car => (
             <VehicleCard key={car.id} vehicle={car} />
           ))}
