@@ -9,12 +9,13 @@ export default function VehicleCard({ vehicle }) {
 
   return (
     <div className={styles.card}>
-      <Link href={`/estoque/${vehicle.id}`} className={styles.imageWrapper}>
-        {vehicle.featured && <span className={styles.featured}>Destaque</span>}
-        <img src={vehicle.photos[0]} alt={`${vehicle.brand} ${vehicle.model}`} loading="lazy" />
+      <Link href={`/ofertas/${vehicle.id}`} className={styles.imageWrapper}>
+        <img src={vehicle.photos[0]} alt={`${vehicle.brand} ${vehicle.model}`} className={styles.image} />
+        {vehicle.featured && <span className={styles.tag}>Destaque</span>}
       </Link>
+      
       <div className={styles.content}>
-        <Link href={`/estoque/${vehicle.id}`}>
+        <Link href={`/ofertas/${vehicle.id}`} style={{ textDecoration: 'none' }}>
           <h3 className={styles.title}>{vehicle.brand} {vehicle.model}</h3>
           <p className={styles.version}>{vehicle.version}</p>
         </Link>

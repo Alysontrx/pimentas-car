@@ -18,6 +18,7 @@ export default function VehicleDetails({ params }) {
   const resolvedParams = use(params);
   const vehicleId = resolvedParams.id;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mainPhotoIndex, setMainPhotoIndex] = useState(0);
   
   const vehicle = mockVehicles.find(v => v.id === vehicleId);
 
@@ -28,8 +29,8 @@ export default function VehicleDetails({ params }) {
   return (
     <div className="container" style={{ padding: '4rem 1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
       
-      <Link href="/estoque" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-primary)', marginBottom: '1.5rem', textDecoration: 'none', fontWeight: 'bold' }}>
-        &larr; Voltar para o Estoque
+      <Link href="/ofertas" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-primary)', marginBottom: '1.5rem', textDecoration: 'none', fontWeight: 'bold' }}>
+        &larr; Voltar para as Ofertas
       </Link>
 
       <div style={{ backgroundColor: 'var(--color-gray-900)', padding: '2rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-gray-800)' }}>
@@ -53,11 +54,36 @@ export default function VehicleDetails({ params }) {
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ width: '100%', borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--color-gray-800)' }}>
               <img 
-                src={vehicle.photos[0]} 
+                src={vehicle.photos[mainPhotoIndex]} 
                 alt={`${vehicle.brand} ${vehicle.model}`} 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', aspectRatio: '4/3', display: 'block' }} 
+                style={{ width: '100%', height: '100%', objectFit: 'cover', aspectRatio: '4/3', display: 'block', transition: 'opacity 0.3s ease' }} 
               />
             </div>
+
+            {/* Miniaturas */}
+            {vehicle.photos.length > 1 && (
+              <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+                {vehicle.photos.map((photo, index) => (
+                  <div 
+                    key={index}
+                    onClick={() => setMainPhotoIndex(index)}
+                    style={{ 
+                      width: '80px', 
+                      height: '60px', 
+                      borderRadius: 'var(--radius-sm)', 
+                      overflow: 'hidden', 
+                      cursor: 'pointer',
+                      border: mainPhotoIndex === index ? '2px solid var(--color-primary)' : '2px solid transparent',
+                      opacity: mainPhotoIndex === index ? 1 : 0.6,
+                      transition: 'all 0.2s ease',
+                      flexShrink: 0
+                    }}
+                  >
+                    <img src={photo} alt={`Miniatura ${index + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                ))}
+              </div>
+            )}
             {/* Opcionais / Tags Simuladas */}
             <div style={{ marginTop: '1rem' }}>
               <h3 style={{ fontSize: '1.2rem', color: 'var(--color-white)', marginBottom: '1rem' }}>Opcionais Principais</h3>

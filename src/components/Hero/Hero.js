@@ -18,6 +18,9 @@ export default function Hero() {
             Encontre seu próximo veículo na Pimentas Car. Qualidade, procedência e as melhores condições de São Bernardo do Campo.
           </p>
 
+          <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className={styles.wppButton}>
+            Fale com um consultor
+          </a>
         </div>
       </div>
     </section>

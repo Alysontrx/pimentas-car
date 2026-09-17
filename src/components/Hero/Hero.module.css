@@ -55,6 +55,27 @@
   line-height: 1.6;
 }
 
+.wppButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25D366; /* Cor do WhatsApp */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+  margin-bottom: 2rem;
+}
+
+.wppButton:hover {
+  background-color: #128C7E;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
 .searchBox {
   background-color: rgba(10, 10, 10, 0.85);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);

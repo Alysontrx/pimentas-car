@@ -39,9 +39,12 @@ export default function Contato() {
               <span>Av. Brg. Faria Lima, 1002 - Centro<br/>São Bernardo do Campo - SP, 09720-000</span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--color-gray-900)', paddingBottom: '1.5rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>📱</span>
-              <a href="https://wa.me/5511997874777" target="_blank" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>(11) 99787-4777 <span style={{ color: 'var(--color-primary)', fontSize: '0.9rem', marginLeft: '0.5rem' }}>(WhatsApp)</span></a>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', borderBottom: '1px solid var(--color-gray-900)', paddingBottom: '1.5rem' }}>
+              <span style={{ fontSize: '1.5rem', marginTop: '0.2rem' }}>📱</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <a href="https://wa.me/5511970582522" target="_blank" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Loja: (11) 97058-2522 <span style={{ color: 'var(--color-primary)', fontSize: '0.9rem', marginLeft: '0.5rem' }}>(WhatsApp)</span></a>
+                <a href="https://wa.me/5511997874777" target="_blank" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Consultor Felipe: (11) 99787-4777 <span style={{ color: 'var(--color-primary)', fontSize: '0.9rem', marginLeft: '0.5rem' }}>(WhatsApp)</span></a>
+              </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', borderBottom: '1px solid var(--color-gray-900)', paddingBottom: '1.5rem' }}>
@@ -51,7 +54,7 @@ export default function Contato() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', paddingBottom: '1.5rem' }}>
               <span style={{ fontSize: '1.5rem' }}>🕒</span>
-              <span>Segunda a Sexta: 09:00 - 18:00<br/>Sábado: 09:00 - 14:00</span>
+              <span>Segunda a Sexta: 09:00 - 18:00<br/>Sábado: 09:00 - 15:00<br/>Domingo: Fechado</span>
             </div>
 
           </div>

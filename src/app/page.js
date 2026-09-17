@@ -27,11 +27,11 @@ export default function Home() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <Link href="/estoque" style={{ display: 'inline-block', padding: '1.2rem 3rem', backgroundColor: 'transparent', color: 'var(--color-primary)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-primary)', fontWeight: 'bold', fontSize: '1.1rem', transition: 'var(--transition-fast)' }}
+          <Link href="/ofertas" style={{ display: 'inline-block', padding: '1.2rem 3rem', backgroundColor: 'transparent', color: 'var(--color-primary)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-primary)', fontWeight: 'bold', fontSize: '1.1rem', transition: 'var(--transition-fast)' }}
             onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary)'; e.currentTarget.style.color = 'white'; }}
             onMouseOut={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-primary)'; }}
           >
-            Ver Estoque Completo
+            Ver Ofertas Completas
           </Link>
         </div>
       </section>
