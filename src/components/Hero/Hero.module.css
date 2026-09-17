@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: 100vh; /* Aumentado para 100vh para mostrar mais da foto verticalmente */
   display: flex;
   align-items: center;
   padding: 4rem 0;
@@ -15,7 +15,7 @@
   height: 100%;
   background-image: url('/hero.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center 30%; /* Meio termo entre o teto e o carro */
   z-index: 1;
 }
 
