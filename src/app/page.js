@@ -1,12 +1,23 @@
-"use client";
 import Hero from '@/components/Hero/Hero';
 import VehicleCard from '@/components/VehicleCard/VehicleCard';
-import { mockVehicles } from '@/data/mockVehicles';
+import { getVehicles } from '@/services/api';
 import Link from 'next/link';
 import styles from './page.module.css';
 
-export default function Home() {
-  const destaques = mockVehicles.slice(0, 3);
+export default async function Home() {
+  const vehicles = await getVehicles();
+  
+  // Pegar carros com modelos diferentes para não parecer duplicado
+  const uniqueModels = [];
+  const destaques = [];
+  
+  for (const car of vehicles) {
+    if (!uniqueModels.includes(car.model)) {
+      uniqueModels.push(car.model);
+      destaques.push(car);
+    }
+    if (destaques.length === 3) break;
+  }
 
   return (
     <>
@@ -27,10 +38,7 @@ export default function Home() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <Link href="/ofertas" style={{ display: 'inline-block', padding: '1.2rem 3rem', backgroundColor: 'transparent', color: 'var(--color-primary)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-primary)', fontWeight: 'bold', fontSize: '1.1rem', transition: 'var(--transition-fast)' }}
-            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-primary)'; e.currentTarget.style.color = 'white'; }}
-            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--color-primary)'; }}
-          >
+          <Link href="/ofertas" className={styles.offersLink}>
             Ver Ofertas Completas
           </Link>
         </div>
