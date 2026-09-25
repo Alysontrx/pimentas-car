@@ -36,7 +36,8 @@ export async function getVehicles() {
     return mappedVehicles;
   } catch (error) {
     console.error("Erro ao buscar dados dos veículos:", error);
-    // Em caso de falha, retornar array vazio em vez de quebrar a tela
-    return [];
+    // Em vez de retornar um array vazio e limpar o site, lançamos o erro
+    // para que o Next.js mantenha o cache antigo dos veículos intacto.
+    throw error;
   }
 }
