@@ -1,7 +1,7 @@
 export async function getVehicles() {
   try {
     const res = await fetch('https://feed.itcar.com.br/json/exporta-site-itcar-pimentascar.com.br.json', {
-      next: { revalidate: 60 } // Atualiza a cada 1 minuto (60 segundos)
+      cache: 'no-store' // Desabilita o cache para garantir dados sempre atualizados
     });
 
     if (!res.ok) {
@@ -10,9 +10,16 @@ export async function getVehicles() {
 
     const data = await res.json();
     
-    const veiculos = data?.CargaVeiculos?.Veiculo;
+    let rawVeiculos = data?.CargaVeiculos?.Veiculo || data?.Veiculos;
 
-    if (!veiculos || !Array.isArray(veiculos)) {
+    let veiculos = [];
+    if (Array.isArray(rawVeiculos)) {
+      veiculos = rawVeiculos;
+    } else if (rawVeiculos && typeof rawVeiculos === 'object') {
+      veiculos = [rawVeiculos]; // Lida com o caso onde XML-to-JSON retorna objeto em vez de array (1 único carro)
+    }
+
+    if (veiculos.length === 0) {
       return [];
     }
 
