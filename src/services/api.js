@@ -1,7 +1,7 @@
 export async function getVehicles() {
   try {
     const res = await fetch('https://feed.itcar.com.br/json/exporta-site-itcar-pimentascar.com.br.json', {
-      next: { revalidate: 600 } // Atualiza a cada 10 minutos (600 segundos)
+      next: { revalidate: 60 } // Atualiza a cada 1 minuto (60 segundos)
     });
 
     if (!res.ok) {
@@ -10,27 +10,29 @@ export async function getVehicles() {
 
     const data = await res.json();
     
-    if (!data.Veiculos || !Array.isArray(data.Veiculos)) {
+    const veiculos = data?.CargaVeiculos?.Veiculo;
+
+    if (!veiculos || !Array.isArray(veiculos)) {
       return [];
     }
 
     // Mapeando do formato da API para o formato que os componentes esperam
-    const mappedVehicles = data.Veiculos.map(v => ({
-      id: v.Codigo,
+    const mappedVehicles = veiculos.map(v => ({
+      id: String(v.Codigo),
       brand: v.Marca,
       model: v.Modelo,
-      version: v.Versao,
-      year: `${v.AnoFabricacao}/${v.AnoModelo}`,
-      mileage: parseInt(v.Quilometragem) || 0,
+      version: v.ModeloVersao || v.Versao,
+      year: `${v.AnoFabr}/${v.AnoModelo}`,
+      mileage: parseInt(v.Km) || 0,
       transmission: v.Cambio,
       fuel: v.Combustivel,
       price: parseFloat(v.Preco) || 0,
       color: v.Cor,
-      engine: v.Motor,
+      engine: v.Motorizacao || v.Motor,
       doors: parseInt(v.Portas) || 4,
-      featured: v.Destaque === 'Sim', // Caso seja sim, destaca
-      photos: v.Fotos && v.Fotos[0] !== 'sem_fotos' ? v.Fotos : [],
-      opcionais: v.Opcionais || []
+      featured: v.EmDestaque === '1' || v.Destaque === 'Sim', // Caso seja sim, destaca
+      photos: v.Fotos && v.Fotos.length > 0 && v.Fotos[0].FotoURL && !v.Fotos[0].FotoURL.includes('sem_fotos') ? v.Fotos.map(f => f.FotoURL || f) : [],
+      opcionais: v.Equipamentos ? v.Equipamentos.split(', ') : (v.Opcionais || [])
     }));
 
     return mappedVehicles;
