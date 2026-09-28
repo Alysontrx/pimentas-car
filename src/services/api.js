@@ -38,7 +38,9 @@ export async function getVehicles() {
       engine: v.Motorizacao || v.Motor || '',
       doors: parseInt(v.Portas) || 4,
       featured: v.EmDestaque === '1' || v.Destaque === 'Sim',
-      photos: v.Fotos && Array.isArray(v.Fotos) && v.Fotos.length > 0 && v.Fotos[0].FotoURL && !v.Fotos[0].FotoURL.includes('sem_fotos') ? v.Fotos.map(f => f.FotoURL || f) : [],
+      photos: (Array.isArray(v.Fotos) ? v.Fotos : (v.Fotos ? [v.Fotos] : []))
+        .map(f => typeof f === 'string' ? f : (f?.FotoURL || f?.url || ''))
+        .filter(url => url && typeof url === 'string' && !url.includes('sem_foto')),
       opcionais: v.Equipamentos ? v.Equipamentos.split(', ') : (v.Opcionais || [])
     }));
 
