@@ -10,13 +10,16 @@ export default function VehicleCard({ vehicle }) {
   return (
     <div className={styles.card}>
       <Link href={`/ofertas/${vehicle.id}`} className={styles.imageWrapper}>
-        {vehicle.photos && vehicle.photos.length > 0 ? (
-          <img src={vehicle.photos[0]} alt={`${vehicle.brand} ${vehicle.model}`} className={styles.image} />
-        ) : (
-          <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--color-gray-900)', color: 'var(--text-muted)' }}>
-            Sem Foto
-          </div>
-        )}
+        <img 
+          src={(vehicle.photos && vehicle.photos.length > 0 && vehicle.photos[0]) || '/sem-foto.jpg'} 
+          alt={`${vehicle.brand} ${vehicle.model}`} 
+          className={styles.image}
+          onError={(e) => {
+            if (e.currentTarget.src !== window.location.origin + '/sem-foto.jpg') {
+              e.currentTarget.src = '/sem-foto.jpg';
+            }
+          }}
+        />
         {vehicle.featured && <span className={styles.tag}>Destaque</span>}
       </Link>
       

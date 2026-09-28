@@ -24,31 +24,57 @@ export async function getVehicles() {
     }
 
     // Mapeando do formato da API para o formato que os componentes esperam
-    const mappedVehicles = veiculos.map(v => ({
-      id: String(v.Codigo || ''),
-      brand: v.Marca || '',
-      model: v.Modelo || '',
-      version: v.ModeloVersao || v.Versao || '',
-      year: `${v.AnoFabr || ''}/${v.AnoModelo || ''}`,
-      mileage: parseInt(v.Km) || 0,
-      transmission: v.Cambio || '',
-      fuel: v.Combustivel || '',
-      price: parseFloat(v.Preco) || 0,
-      color: v.Cor || '',
-      engine: v.Motorizacao || v.Motor || '',
-      doors: parseInt(v.Portas) || 4,
-      featured: v.EmDestaque === '1' || v.Destaque === 'Sim',
-      photos: (Array.isArray(v.Fotos) ? v.Fotos : (v.Fotos ? [v.Fotos] : []))
+    const mappedVehicles = veiculos.map(v => {
+      // Normalização de fotos
+      let rawPhotos = [];
+      if (Array.isArray(v.Fotos)) {
+        rawPhotos = v.Fotos;
+      } else if (v.Fotos) {
+        rawPhotos = [v.Fotos];
+      }
+
+      const validPhotos = rawPhotos
         .map(f => typeof f === 'string' ? f : (f?.FotoURL || f?.url || ''))
-        .filter(url => url && typeof url === 'string'),
-      opcionais: v.Equipamentos ? v.Equipamentos.split(', ') : (v.Opcionais || [])
-    }));
+        .filter(url => url && typeof url === 'string' && url.startsWith('http') && !url.includes('sem_fotos'));
+
+      const anoFab = v.AnoFabricacao || v.AnoFabr || '';
+      const anoMod = v.AnoModelo || '';
+      let yearFormatted = '';
+      if (anoFab && anoMod) {
+        yearFormatted = `${anoFab}/${anoMod}`;
+      } else if (anoMod) {
+        yearFormatted = `${anoMod}/${anoMod}`;
+      } else if (anoFab) {
+        yearFormatted = `${anoFab}/${anoFab}`;
+      }
+
+      return {
+        id: String(v.Codigo || ''),
+        brand: v.Marca || '',
+        model: v.Modelo || '',
+        version: v.Versao || v.ModeloVersao || '',
+        year: yearFormatted,
+        mileage: parseInt(v.Quilometragem || v.Km) || 0,
+        transmission: v.Cambio || '',
+        fuel: v.Combustivel || '',
+        price: parseFloat(v.Preco) || 0,
+        color: v.Cor || '',
+        engine: v.Motor || v.Motorizacao || '',
+        doors: parseInt(v.Portas) || 4,
+        featured: v.Destaque === 'Sim' || v.EmDestaque === '1',
+        photos: validPhotos.length > 0 ? validPhotos : ['/sem-foto.jpg'],
+        opcionais: Array.isArray(v.Opcionais)
+          ? v.Opcionais.filter(o => o && o !== 'Nenhum opcional informado')
+          : (v.Equipamentos ? v.Equipamentos.split(', ') : [])
+      };
+    });
 
     return mappedVehicles;
   } catch (error) {
+    if (error?.digest === 'DYNAMIC_SERVER_USAGE') {
+      throw error;
+    }
     console.error("Erro ao buscar dados dos veículos:", error);
-    // Em vez de retornar um array vazio e limpar o site, lançamos o erro
-    // para que o Next.js mantenha o cache antigo dos veículos intacto.
     throw error;
   }
 }

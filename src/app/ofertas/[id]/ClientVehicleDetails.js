@@ -81,6 +81,11 @@ export default function ClientVehicleDetails({ vehicle }) {
                     src={vehicle.photos[mainPhotoIndex]} 
                     alt={`${vehicle.brand} ${vehicle.model}`} 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', aspectRatio: '4/3', display: 'block', transition: 'opacity 0.3s ease', pointerEvents: 'none' }} 
+                    onError={(e) => {
+                      if (e.currentTarget.src !== window.location.origin + '/sem-foto.jpg') {
+                        e.currentTarget.src = '/sem-foto.jpg';
+                      }
+                    }}
                   />
                   {vehicle.photos.length > 1 && (
                     <>
@@ -100,9 +105,11 @@ export default function ClientVehicleDetails({ vehicle }) {
                   )}
                 </>
               ) : (
-                <div style={{ width: '100%', aspectRatio: '4/3', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
-                  Sem foto disponível
-                </div>
+                <img 
+                  src="/sem-foto.jpg" 
+                  alt={`${vehicle.brand} ${vehicle.model}`} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', aspectRatio: '4/3', display: 'block' }} 
+                />
               )}
             </div>
 
