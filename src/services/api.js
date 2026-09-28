@@ -18,20 +18,20 @@ export async function getVehicles() {
 
     // Mapeando do formato da API para o formato que os componentes esperam
     const mappedVehicles = veiculos.map(v => ({
-      id: String(v.Codigo),
-      brand: v.Marca,
-      model: v.Modelo,
-      version: v.ModeloVersao || v.Versao,
-      year: `${v.AnoFabr}/${v.AnoModelo}`,
+      id: String(v.Codigo || ''),
+      brand: v.Marca || '',
+      model: v.Modelo || '',
+      version: v.ModeloVersao || v.Versao || '',
+      year: `${v.AnoFabr || ''}/${v.AnoModelo || ''}`,
       mileage: parseInt(v.Km) || 0,
-      transmission: v.Cambio,
-      fuel: v.Combustivel,
+      transmission: v.Cambio || '',
+      fuel: v.Combustivel || '',
       price: parseFloat(v.Preco) || 0,
-      color: v.Cor,
-      engine: v.Motorizacao || v.Motor,
+      color: v.Cor || '',
+      engine: v.Motorizacao || v.Motor || '',
       doors: parseInt(v.Portas) || 4,
-      featured: v.EmDestaque === '1' || v.Destaque === 'Sim', // Caso seja sim, destaca
-      photos: v.Fotos && v.Fotos.length > 0 && v.Fotos[0].FotoURL && !v.Fotos[0].FotoURL.includes('sem_fotos') ? v.Fotos.map(f => f.FotoURL || f) : [],
+      featured: v.EmDestaque === '1' || v.Destaque === 'Sim',
+      photos: v.Fotos && Array.isArray(v.Fotos) && v.Fotos.length > 0 && v.Fotos[0].FotoURL && !v.Fotos[0].FotoURL.includes('sem_fotos') ? v.Fotos.map(f => f.FotoURL || f) : [],
       opcionais: v.Equipamentos ? v.Equipamentos.split(', ') : (v.Opcionais || [])
     }));
 
