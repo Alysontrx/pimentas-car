@@ -40,7 +40,7 @@ export async function getVehicles() {
       featured: v.EmDestaque === '1' || v.Destaque === 'Sim',
       photos: (Array.isArray(v.Fotos) ? v.Fotos : (v.Fotos ? [v.Fotos] : []))
         .map(f => typeof f === 'string' ? f : (f?.FotoURL || f?.url || ''))
-        .filter(url => url && typeof url === 'string' && !url.includes('sem_foto')),
+        .filter(url => url && typeof url === 'string'),
       opcionais: v.Equipamentos ? v.Equipamentos.split(', ') : (v.Opcionais || [])
     }));
 
